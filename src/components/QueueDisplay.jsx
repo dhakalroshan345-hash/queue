@@ -11,13 +11,12 @@ function QueueDisplay({ queue, onUpdateStatus, onRemove }) {
         return "var(--text)";
     }
   };
-  queue.map((customer) => console.log(customer.name));
 
   return (
     <div className="queue-display">
-      <h2>Current queue</h2>
+      <h2>Current Queue</h2>
       {queue.length === 0 ? (
-        <p className="empty-queue">No cutomer data</p>
+        <p className="empty-queue">No customer data</p>
       ) : (
         <div className="queue-list">
           {queue.map((customer) => (
@@ -34,27 +33,26 @@ function QueueDisplay({ queue, onUpdateStatus, onRemove }) {
               </div>
               <div className="actions">
                 {customer.status === "waiting" && (
-                  <span
+                  <button
                     className="serve-btn"
                     onClick={() => onUpdateStatus(customer.id, "serving")}
                   >
                     Serve
-                  </span>
+                  </button>
                 )}
                 {customer.status === "serving" && (
-                  <span
+                  <button
                     className="complete-btn"
                     onClick={() => onUpdateStatus(customer.id, "completed")}
                   >
-                    Serve
-                  </span>
+                    Complete
+                  </button>
                 )}
                 <button
                   className="remove-btn"
                   onClick={() => onRemove(customer.id)}
                 >
-                  {" "}
-                  remove
+                  Remove
                 </button>
               </div>
             </div>

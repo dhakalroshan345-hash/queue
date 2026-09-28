@@ -1,7 +1,25 @@
+
+*{
+  box-sizing: border-box;
+}
+/* Light Theme */
 :root {
+  --background: #ffffff;
+  --surface: #f2f2f2;
+  --primary: #646cff;
+  --text: #000000;
+  --text-secondary: #555555;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --error: #f44336;
+  --info: #2196f3;
+}
+
+/* Dark Theme */
+.app.dark {
   --background: #1a1a1a;
   --surface: #2d2d2d;
-  --primary: #646cff;
+  --primary: #00bcd4;
   --text: #ffffff;
   --text-secondary: #888888;
   --success: #4caf50;
@@ -14,7 +32,8 @@ body {
   background-color: var(--background);
   color: var(--text);
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app {
@@ -43,14 +62,23 @@ main {
   gap: 2rem;
 }
 
-.queue-form {
+.queue-form,
+.queue-display {
   background: var(--surface);
   padding: 1.5rem;
-  border-radius: 8px;
-  height: fit-content;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.queue-form h2 {
+.queue-form:hover,
+.queue-display:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.queue-form h2,
+.queue-display h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
   color: var(--primary);
@@ -58,6 +86,7 @@ main {
 
 .form-group {
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 input,
@@ -65,26 +94,21 @@ select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--text-secondary);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--background);
   color: var(--text);
   font-size: 1rem;
-  box-sizing: border-box;
   height: 45px;
-}
-
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 0.7rem center;
-  background-size: 1.5em;
+  box-sizing: border-box;
+  display: block;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
 }
 
 button {
@@ -93,7 +117,7 @@ button {
   background: var(--primary);
   color: var(--text);
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -101,16 +125,12 @@ button {
   gap: 0.5rem;
   font-size: 1rem;
   height: 45px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 button:hover {
+  transform: translateY(-2px);
   opacity: 0.9;
-}
-
-.queue-display {
-  background: var(--surface);
-  padding: 1.5rem;
-  border-radius: 8px;
 }
 
 .queue-list {
@@ -121,10 +141,11 @@ button:hover {
 .queue-item {
   background: var(--background);
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
 .customer-info h3 {
@@ -150,6 +171,7 @@ button:hover {
 .actions button {
   width: auto;
   padding: 0.5rem 1rem;
+  border-radius: 6px;
 }
 
 .serve-btn {
@@ -167,6 +189,20 @@ button:hover {
 .empty-queue {
   text-align: center;
   color: var(--text-secondary);
+}
+
+.clear-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {
